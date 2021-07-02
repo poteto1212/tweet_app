@@ -1,8 +1,8 @@
-
 <div class="main posts-show">
   <div class="container">
     <div class="posts-show-item">
       <p>
+        <h1 class=wearning>本当に削除しますか？</h1>
         <%= @post.content %>
       </p>
       <div class="post-time">
@@ -10,8 +10,8 @@
       </div>
       <!--右下に編集ボタン-->
       <div class="post-menus">
-          <%= link_to("編集","/posts/#{@post.id}/edit") %>
-          <%= link_to("削除","/posts/#{@post.id}/verification") %>
+          <%= link_to("戻る","/posts/#{@post.id}") %>
+          <%= link_to("削除","/posts/#{@post.id}/destory",{method: "post"}) %>
       </div>
     </div>
   </div>
