@@ -1,0 +1,17 @@
+<!--データベースから受け取る変数作ろう-->
+
+
+
+
+
+
+<div class="main posts-index">
+  <div class="container">
+    <% @posts.each do |post1| %>
+    <div class="posts-index-item">
+      <%= link_to(post1.content,"/posts/#{post1.id}") %>
+    </div>
+    <% end %>
+   
+  </div>
+</div>
