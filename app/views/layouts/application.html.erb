@@ -24,8 +24,19 @@
             <li>
                 <a href="/posts/new" >新規投稿</a>
             </li>
+            
+            <li>
+                <a href="/users/index">ユーザー一覧</a>
+            </li>
         </ul>
     </header>
+    
+    
+    <% if flash[:notice] %>
+        <div class="flash">
+            <%= flash[:notice] %>
+        </div>
+    <% end %>
     <%= yield %>
   </body>
 </html>

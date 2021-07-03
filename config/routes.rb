@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'users/index'
 #ルーティングは送信されたurLに対するコントローラの対応表
 #get URL => コントローラ#アクション
  
@@ -19,4 +20,7 @@ Rails.application.routes.draw do
     post 'posts/:id/destory' => "posts#destory"
   
 #ホーム画面
+
+    #ユーザー管理
+    get "users/index" => "users#index"
 end
