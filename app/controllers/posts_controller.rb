@@ -27,14 +27,21 @@ class PostsController < ApplicationController
   
   #更新アクション
   def update
-      key=params[:id]
-      @post=Post.find_by(id: key)
-      @post.content=params[:content]
-      @post.save
-      
-     
-      redirect_to controller: :posts ,action: :edit, id: key
+    key=params[:id]
+    @post=Post.find_by(id: key)
+    @post.content=params[:content]
+    
+    if @post.save==true
+        redirect_to("/posts/index")
+    else @post.save==false
+        #rnderを使うとeditアクションを経由せずにHTMLを表示できる
+        #アクションは前までに表示されていたものに依存する。
+        render("posts/edit")
+        #redirect_to("/posts/#{@post.id}/edit")
+    end
   end
+  
+
   
   def verification
       @post=Post.find_by(id: params[:id])
