@@ -23,4 +23,5 @@ Rails.application.routes.draw do
 
     #ユーザー管理
     get "users/index" => "users#index"
+    get "users/new"=>"users#new"
 end
