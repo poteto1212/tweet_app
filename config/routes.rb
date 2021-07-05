@@ -24,4 +24,7 @@ Rails.application.routes.draw do
     #ユーザー管理
     get "users/index" => "users#index"
     get "users/new"=>"users#new"
+    get "users/:id"=>"users#show"
+    #データベースへユーザー登録する
+    post "users/create"=>"users#create"
 end
