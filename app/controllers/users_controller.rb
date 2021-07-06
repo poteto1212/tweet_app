@@ -19,4 +19,24 @@ class UsersController < ApplicationController
       render("users/new")
     end
   end
+
+  def edit
+    key=params[:id]
+    @user=User.find_by(id: key)
+  end
+
+  def update
+    key=params[:id]
+    @user=User.find_by(id: key)
+    @user.name=params[:name]
+    @user.email=params[:email]
+  
+    if @user.save
+      flash[:notice]="ユーザー名を編集しました。"
+      redirect_to("/users/#{@user.id}")
+    else
+      render("users/edit")
+    end
+
+  end
 end

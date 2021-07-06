@@ -27,4 +27,8 @@ Rails.application.routes.draw do
     get "users/:id"=>"users#show"
     #データベースへユーザー登録する
     post "users/create"=>"users#create"
+
+    #ユーザー編集機能
+    get "users/:id/edit"=>"users#edit"
+    post "users/:id/update"=>"users#update"
 end
