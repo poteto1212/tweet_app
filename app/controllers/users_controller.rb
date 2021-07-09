@@ -30,6 +30,12 @@ class UsersController < ApplicationController
     @user=User.find_by(id: key)
     @user.name=params[:name]
     @user.email=params[:email]
+    #画像URLをデータベースに保存する処理
+    @user.image_name="#{@user.id}.jpg"
+
+    #画像の保存先の指定
+    image=params[:image]
+    File.binwrite("public/user_images/#{@user.image_name}",image.read)
   
     if @user.save
       flash[:notice]="ユーザー名を編集しました。"
