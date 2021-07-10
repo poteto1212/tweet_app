@@ -59,6 +59,11 @@ class UsersController < ApplicationController
       redirect_to("/posts/index")
     else
       #ユーザーが存在しない時は再表示
+      @error_message="メールアドレスもしくはパスワードが間違っています"
+
+      #間違えた時のデフォルト値
+      @email=params[:email]
+      @password=params[:password]
       render("users/login_form")
     end
   end
