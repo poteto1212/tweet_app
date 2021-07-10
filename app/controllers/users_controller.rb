@@ -45,4 +45,21 @@ class UsersController < ApplicationController
     end
 
   end
+  #ログインページの表示
+  def login_form
+  end
+  #ログインページの表示
+  def login
+    #ログインユーザーを特定する
+    @user = User.find_by(email:params[:email],password:params[:password])
+    #ユーザーが存在する時・・・
+    if @user
+      flash[:notice]="ログインしました"
+      #podtsファイルのindexメソッドに飛ぶ
+      redirect_to("/posts/index")
+    else
+      #ユーザーが存在しない時は再表示
+      render("users/login_form")
+    end
+  end
 end
