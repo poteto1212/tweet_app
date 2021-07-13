@@ -1,4 +1,7 @@
 class PostsController < ApplicationController
+  #ログインしてない場合は全て弾く
+  before_action :authenticate_user 
+
   def index
       #@をつける事でテンプレートに直接渡せる
     @posts=Post.all.order(created_at: :desc)
