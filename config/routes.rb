@@ -4,6 +4,10 @@ Rails.application.routes.draw do
  #ログイン情報の送信処理
     post "logined"=>"users#login"
 
+
+    #ログアウト
+    post "logout"=>"users#logout"
+
     get 'users/index'
 #ルーティングは送信されたurLに対するコントローラの対応表
 #get URL => コントローラ#アクション

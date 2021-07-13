@@ -11,8 +11,10 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user=User.new(name: params[:name],email: params[:email],image_name:'default_user.jpg')
+    @user=User.new(name: params[:name],email: params[:email],image_name:'default_user.jpg',password: params[:password])
     if @user.save
+      #登録情報をそのままセッションに飛ばす。
+      session[:user_id]=@user.id
       flash[:notice]="ユーザー登録が完了しました。"
       redirect_to("/users/#{@user.id}")
     else
@@ -54,6 +56,8 @@ class UsersController < ApplicationController
     @user = User.find_by(email:params[:email],password:params[:password])
     #ユーザーが存在する時・・・
     if @user
+      #session変数はブラウザに一次保持させる
+      session[:user_id]=@user.id
       flash[:notice]="ログインしました"
       #podtsファイルのindexメソッドに飛ぶ
       redirect_to("/posts/index")
@@ -66,5 +70,13 @@ class UsersController < ApplicationController
       @password=params[:password]
       render("users/login_form")
     end
+  end
+
+  #ログアウト処理
+  def logout
+    session[:user_id]=nil
+    flash[:notice]="ログアウトしました。"
+    #ログイン画面に飛ぶ
+    redirect_to("/login")
   end
 end
