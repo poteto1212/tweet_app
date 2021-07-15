@@ -1,6 +1,11 @@
 class UsersController < ApplicationController
 #ログインしてない時弾くものを指定する
 before_action :authenticate_user,{only: [:index,:show,:edit,:update]}
+#ログインしている状態で弾くものを指定する
+before_action :forbid_login_user,{only: [:new,:create,:login_form,:login]}
+#自身のファイルで定義しているメソッド
+before_action :ensure_current_user,{only:[:edit,:update]}
+
 
   def index
     @users=User.all
@@ -81,5 +86,13 @@ before_action :authenticate_user,{only: [:index,:show,:edit,:update]}
     flash[:notice]="ログアウトしました。"
     #ログイン画面に飛ぶ
     redirect_to("/login")
+  end
+
+  def ensure_current_user
+    #セッションユーザーIDとリンクのIDが一致しない時
+    if @current_user.id != params[:id].to_i
+      flash[:notice]="権限がありません"
+      redirect_to("/posts/index")
+    end
   end
 end

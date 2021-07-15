@@ -15,5 +15,13 @@ class ApplicationController < ActionController::Base
             redirect_to("/login")
         end
     end
+
+    #ログイン状態では弾く
+    def forbid_login_user
+        if @current_user
+            flash[:notice]="既にログインしています"
+            redirect_to("/posts/index")
+        end
+    end
     
 end
