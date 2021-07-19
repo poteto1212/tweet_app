@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   #ログインしてない場合は全て弾く
   before_action :authenticate_user 
-
+  before_action :ensure_current_user,{only:[:edit,:update,:destory]}
   def index
       #@をつける事でテンプレートに直接渡せる
     @posts=Post.all.order(created_at: :desc)
@@ -69,5 +69,17 @@ class PostsController < ApplicationController
       @post=Post.find_by(id: key)
       @post.destroy
       redirect_to("/posts/index")
+  end
+
+
+  #ログインユーザーでなければ投稿を編集出来ないようにする
+
+  def ensure_current_user
+    @post=Post.find_by(id: params[:id])
+
+    if @post.user_id != @current_user.id
+      falsh[:notice]="権限がありません"
+      redirect_to("/posts/index")
+    end
   end
 end
