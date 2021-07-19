@@ -8,7 +8,10 @@ class PostsController < ApplicationController
   end
   
   def show
+    #投稿情報取得
     @post=Post.find_by(id: params[:id])
+    #ユーザー情報取得
+    @user=@post.user
   end
   
   def new
@@ -19,7 +22,10 @@ class PostsController < ApplicationController
   #コメント入れるときは全角要注意！
   def create
     #データベースへの保存
-    @post=Post.new(content: params[:content])
+    @post=Post.new(
+    content: params[:content],
+    user_id: @current_user.id#セッション中に含まれるユーザーIDをデフォルトで追加させる。
+    )
     
     if @post.save
         flash[:notice]="投稿成功！"

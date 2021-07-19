@@ -8,9 +8,18 @@
 <div class="main posts-index">
   <div class="container">
     <% @posts.each do |post1| %>
-    <div class="posts-index-item">
-      <%= link_to(post1.content,"/posts/#{post1.id}") %>
-    </div>
+      <div class="posts-index-item">
+        <div class="post-left">
+          <img src="<%= "/user_images/#{post1.user.image_name}" %>">  
+        </div>
+        <div class="post-right">
+          <div class="post-user-name">
+            <!-- link_toメソッドを用いて、ユーザー詳細ページへのリンクを作成してください -->
+            <%= link_to(post1.user.name, "/users/#{post1.user.id}") %>
+        </div>
+        <%= link_to(post1.content,"/posts/#{post1.id}") %>
+      </div>
+      </div>
     <% end %>
    
   </div>
